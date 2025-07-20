@@ -4,9 +4,10 @@ public class ticTacToe {
     
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        char[] topRow = {'-', '-', '-'};
-        char[] middleRow = {'-', '-', '-'};
-        char[] bottomRow = {'-', '-', '-'};
+        char[] ticTacToeBoard = {'-', '-', '-', '-', '-', '-', '-', '-', '-'};
+        char[] topRow = {ticTacToeBoard[0], ticTacToeBoard[1], ticTacToeBoard[2]};
+        char[] middleRow = {ticTacToeBoard[3], ticTacToeBoard[4], ticTacToeBoard[5]};
+        char[] bottomRow = {ticTacToeBoard[6], ticTacToeBoard[7], ticTacToeBoard[8]};
 
         System.out.println("Get a friend to play Tic Tac Toe!");
         System.out.print("Type 'ready' when you are ready. ");
@@ -33,16 +34,16 @@ public class ticTacToe {
 
 
             if (xChoice <= 3) {
-                if (checkForAlrdyFilled(xChoice - 1, topRow, middleRow, bottomRow)) {
-                    topRow[xChoice - 1] = 'X';   
+                if (checkForAlrdyFilled(xChoice - 1, ticTacToeBoard)) {
+                    ticTacToeBoard[xChoice - 1] = 'X';   
                 }
             } else if (xChoice >= 4 && xChoice <= 6) {
-                if (checkForAlrdyFilled(xChoice, topRow, middleRow, bottomRow)) {
-                    middleRow[xChoice - 4] = 'X';
+                if (checkForAlrdyFilled(xChoice, ticTacToeBoard)) {
+                    ticTacToeBoard[xChoice - 1] = 'X';
                 }
             } else if(xChoice >= 7 && xChoice <= 9) {
                 if (checkForAlrdyFilled(xChoice, topRow, middleRow, bottomRow)) {
-                    bottomRow[xChoice - 7] = 'X';
+                    ticTacToeBoard[xChoice - 1] = 'X';
                 }
             } else {
                 System.out.println("Invalid choice. Try again.");
@@ -61,22 +62,22 @@ public class ticTacToe {
             
             if (oChoice <= 3) {
                 if (checkForAlrdyFilled(oChoice, topRow, middleRow, bottomRow)) {
-                    topRow[oChoice - 1] = 'X';
+                    ticTacToeBoard[oChoice - 1] = 'X';
                 }
             } else if (oChoice >= 4 && oChoice <= 6) {
                 if (checkForAlrdyFilled(oChoice, topRow, middleRow, bottomRow)) {
-                    middleRow[oChoice - 1] = 'X';
+                    ticTacToeBoard[oChoice - 1] = 'X';
                 }
             } else if(oChoice >= 7 && oChoice <= 9) {
                 if (checkForAlrdyFilled(oChoice, topRow, middleRow, bottomRow)) {
-                    bottomRow[oChoice - 1] = 'X';
+                    ticTacToeBoard[oChoice - 1] = 'X';
                 }
             } else {
                 System.out.println("Invalid choice. Try again.");
             }
         }
 
-
+        scanner.close();
     }
 
     public static boolean checkForAlrdyFilled(int position, char[] topRow, char[] middleRow, char[] bottomRow) {
@@ -86,6 +87,15 @@ public class ticTacToe {
             return middleRow[position - 4] != '-';
         } else if (position >= 7 && position <= 9) {
             return bottomRow[position - 7] != '-';
+        } else {
+            return false; // Invalid position
+        }
+    }
+
+    // Overloaded method for single row
+    public static boolean checkForAlrdyFilled(int position, char[] row) {
+        if (position >= 0 && position < row.length) {
+            return row[position] != '-';
         } else {
             return false; // Invalid position
         }

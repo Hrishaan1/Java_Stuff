@@ -30,7 +30,17 @@ public class taskManager {
                 case 1:
                     System.out.print("Enter task: ");
                     String task = scanner.nextLine();
-                    toDoList.add(task);
+                    System.out.print("Deadline? (y/n) ");
+                    String deadlineYN = scanner.nextLine();
+                    String deadline = null;
+                    if (deadlineYN.equals("y")) {
+                        System.out.print("When is the deadline? (MM/DD/YYYY) ");
+                        String deadlineString = scanner.nextLine();
+                        deadline = deadlineString;
+                    } else if (deadlineYN.equals("n")){
+                        deadline = null;
+                    }
+                    toDoList.add(task + ", Deadline: " + deadline);
                     System.out.println("Added '" + task + "' to the to-do list.");
                     programSleep(1000);
                     break;
