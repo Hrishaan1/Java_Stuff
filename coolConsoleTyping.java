@@ -2,16 +2,16 @@ public class coolConsoleTyping {
     
 
     public static void main(String[] args) {
-        coolType("Hello there");
-        coolType("How are you doing?");
+        coolType("Hello there", true);
+        coolType("How are you doing?", true);
     }
 
-    public static void coolType(String text) {
+    public static void coolType(String text, boolean nextLine) {
         for (int i = 0; i < text.length(); i++) {
             System.out.print(text.substring(i, i + 1));
-            customSleep(100);
+            customSleep(50);
         }
-        System.out.println();
+        if (nextLine) System.out.println();
     }
 
     public static void customSleep(long time) {
