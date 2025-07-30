@@ -11,6 +11,7 @@ public class coolConsoleTyping {
             System.out.print(text.substring(i, i + 1));
             customSleep(50);
         }
+        //if you want it to print and go to the next line
         if (nextLine) System.out.println();
     }
 
