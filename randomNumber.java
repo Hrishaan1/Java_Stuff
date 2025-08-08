@@ -1,8 +1,6 @@
 import java.util.Random;
 import java.util.Scanner;
 
-
-
 public class randomNumber {
     
     public static void main(String[] args) {
@@ -30,9 +28,9 @@ public class randomNumber {
             int playerGuess = scanner.nextInt();
             customSleep(500);
             
-            System.out.println("Nice guess! Your guess was " + Math.abs(randomInt - playerGuess) + " off from the correct number.");
-            System.out.println("The correct number was " + randomInt + ".");
-            System.out.print("Would you like to try again? (answer with a yes or no) ");
+            coolConsoleTyping.coolType("Nice guess! Your guess was " + Math.abs(randomInt - playerGuess) + " off from the correct number.", running);
+            coolConsoleTyping.coolType("The correct number was " + randomInt + ".", running);
+            coolConsoleTyping.coolType("Would you like to try again? (answer with a yes or no)", running);
             scanner.nextLine();
             String continuePlaying = scanner.nextLine();
 
