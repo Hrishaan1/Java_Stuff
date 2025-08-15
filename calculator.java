@@ -15,6 +15,7 @@ public class calculator {
             System.out.println("2. Subtraction");
             System.out.println("3. Multiplication");
             System.out.println("4. Division");
+            System.out.println("5. Exponents");
             System.out.print("Select operation: ");
             int operation = scanner.nextInt();
 
@@ -44,12 +45,20 @@ public class calculator {
                     System.out.println(firstNumX + " x " + secNumX + " = " + (firstNumX * secNumX) + ".");
                     break;
                 case 4:
-                    System.out.print("Enter the number that you want to divide. ");
+                    coolConsoleTyping.coolType("Enter the number that you want to divide. ", false);
                     double firstNumDiv = scanner.nextDouble();
-                    System.out.print("Enter the number that you want to divide by. ");
+                    coolConsoleTyping.coolType("Enter the number that you want to divide by. ", false);
                     double secNumDiv = scanner.nextDouble();
 
                     System.out.println(firstNumDiv + " / " + secNumDiv + " = " + (firstNumDiv / secNumDiv) + ".");
+                    break;
+                case 5:
+                    coolConsoleTyping.coolType("Enter the number that you want to exponentiate. ", false);
+                    double firstNumEx = scanner.nextDouble();
+                    coolConsoleTyping.coolType("Enter the number that you want to raise to the power of. ", false);
+                    double secNumEx = scanner.nextDouble();
+
+                    coolConsoleTyping.coolType(firstNumEx + " ^ " + secNumEx + " = " + Math.pow(firstNumEx, secNumEx), true);
                     break;
             }
         }
