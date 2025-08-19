@@ -71,7 +71,6 @@ public class grades {
         studentNames.add(name);
         studentGrades.add(grade);
         System.out.println("Added student: " + name + " with grade: " + grade);
-// nice
 
 
     } 
