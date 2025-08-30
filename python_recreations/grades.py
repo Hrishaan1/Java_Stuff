@@ -13,7 +13,8 @@ def main():
         print("2. View all students")
         print("3. Calculate average grade")
         print("4. Find student grade")
-        print("5. Exit program")
+        print("5. Edit student grade")
+        print("6. Exit program")
         try:
             choice = int(input("Choose one: "))
         except ValueError:
@@ -48,6 +49,31 @@ def main():
                 stGrade = input("Enter student name here: ")
                 betterPrint(f"{stGrade}'s grade is {gradesDict[stGrade]}")
                 time.sleep(1)
+            case 5:
+                stName = input("Enter student name to edit: ")
+                newGrade = input("Enter new grade: ")
+                students = []
+                found = False
+                with open("grades.csv", "r", newline="") as csvfile:
+                    reader = csv.reader(csvfile)
+                    for row in reader:
+                        if row and row[0] == stName:
+                            students.append([stName, newGrade])
+                            found = True
+                        elif row:
+                            students.append(row)
+                
+                if found:
+                    with open("grades.csv", "w", newline="") as csvfile:
+                        writer = csv.writer(csvfile)
+                        writer.writerows(students)
+                    betterPrint(f"Updated {stName}'s grade to {newGrade}.")
+                else:
+                    betterPrint(f"Student '{stName}' not found.")
+                time.sleep(1)
+            case 6:
+                running = False
+                betterPrint("Ending program. Goodbye!")
 
 def average(grades):
     return sum(grades) / len(grades) if grades else 0
