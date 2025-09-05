@@ -1,6 +1,8 @@
 import csv
 import time
 from betterPrint import betterPrint
+from betterPrint import colorPrint
+from betterPrint import strColor
 
 
 def main():
@@ -16,24 +18,24 @@ def main():
         print("5. Edit student grade")
         print("6. Exit program")
         try:
-            choice = int(input("Choose one: "))
+            choice = int(input(strColor("Choose one: ", "blue")))
         except ValueError:
-            print("Error: Invalid Input.")
+            colorPrint("Error: Invalid Input.", "red")
             time.sleep(1)
 
         match choice:
             case 1:
-                stName = input("Enter student name: ")
-                stIniGrade = input("Enter student initial grade: ")
+                stName = input(strColor("Enter student name: ", "blue"))
+                stIniGrade = input(strColor("Enter student initial grade: ", "blue"))
                 with open("grades.csv", "a", newline="") as csvfile:
                     writer = csv.writer(csvfile)
                     writer.writerow([stName, stIniGrade])
-                betterPrint(f"Added {stName} with grade {stIniGrade}.")
+                betterPrint(strColor(f"Added {stName} with grade {stIniGrade}.", "green"))
                 time.sleep(0.5)
             case 2:
                 with open("grades.csv", "r", newline="") as csvfile:
                     reader = csv.reader(csvfile)
-                    betterPrint("Student Grades:")
+                    betterPrint(strColor("Student Grades:", "blue"))
                     for row in reader:
                         if row:
                             betterPrint(f"{row[0]}: {row[1]}")
@@ -43,15 +45,15 @@ def main():
                 if get_grades():
                     betterPrint(f"Average grade is {average(get_grades())}")
                 else:
-                    betterPrint("No grades found.")
+                    colorPrint("No grades found", "red")
             case 4:
                 gradesDict = get_students_grades()
-                stGrade = input("Enter student name here: ")
+                stGrade = input(strColor("Enter student name here: ", "blue"))
                 betterPrint(f"{stGrade}'s grade is {gradesDict[stGrade]}")
                 time.sleep(1)
             case 5:
-                stName = input("Enter student name to edit: ")
-                newGrade = input("Enter new grade: ")
+                stName = input(strColor("Enter student name to edit: ", "blue"))
+                newGrade = input(strColor("Enter new grade: ", "blue"))
                 students = []
                 found = False
                 with open("grades.csv", "r", newline="") as csvfile:
@@ -67,9 +69,9 @@ def main():
                     with open("grades.csv", "w", newline="") as csvfile:
                         writer = csv.writer(csvfile)
                         writer.writerows(students)
-                    betterPrint(f"Updated {stName}'s grade to {newGrade}.")
+                    betterPrint(strColor(f"Updated {stName}'s grade to {newGrade}.", "green"))
                 else:
-                    betterPrint(f"Student '{stName}' not found.")
+                    colorPrint(f"Student '{stName}' not found.", "red")
                 time.sleep(1)
             case 6:
                 running = False
