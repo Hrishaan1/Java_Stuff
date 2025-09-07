@@ -6,3 +6,6 @@ for ShoppingList.java, you will need to have coolConsoleTyping.java along with i
 ShoppingList.java is now finished :D
 
 ticTacToe.java doesn't work yet ):
+
+Now there are 2 python recreations (3 including the betterPrint.py) that are probably better than the java ones now.
+They can use csv so they will save stuff between usages, and not save everything into arrays or is hardcoded. :D
