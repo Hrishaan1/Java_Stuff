@@ -48,7 +48,7 @@ def main():
                         reader = csv.reader(csvfile)
                         for row in reader:
                             if row and row[0] == name:
-                                new_balance = float(row[1] + depositAmt)
+                                new_balance = float(row[1]) + depositAmt
                                 accounts.append([row[0], new_balance])
                                 found = True
                             elif row:
@@ -60,15 +60,65 @@ def main():
                         betterPrint.betterPrint(betterPrint.strColor(f"Deposited ${depositAmt:.2f} to {name}'s account", "green"))
                     else:
                         betterPrint.betterPrint(betterPrint.strColor(f"Account for '{name}' not found.", "red"))
+                        
                 case 3:
                     # Gets amount to withdraw and updates balance.
-                    ...
+                    name = input(betterPrint.strColor("Enter account holder's first name: ", "blue"))
+                    withdrawAmt = 0
+                    while True:
+                        try:
+                            withdrawAmt = float(input(betterPrint.strColor("Enter withdrawal amount: ", "blue")))
+                            if withdrawAmt < 0:
+                                giveError()
+                                continue
+                            break
+                        except ValueError:
+                            giveError()
+                    accounts = []
+                    found = False
+                    sufficient_funds = True
+                    with open("bank.csv", "r", newline="") as csvfile:
+                        reader = csv.reader(csvfile)
+                        for row in reader:
+                            if row and row[0] == name:
+                                current_balance = float(row[1])
+                                if withdrawAmt > current_balance:
+                                    sufficient_funds = False
+                                    accounts.append(row)
+                                else:
+                                    new_balance = current_balance - withdrawAmt
+                                    accounts.append([row[0], new_balance])
+                                    found = True
+                            elif row:
+                                accounts.append(row)
+                    if not sufficient_funds:
+                        betterPrint.betterPrint(betterPrint.strColor("Insufficient funds for withdrawal.", "red"))
+                    elif found:
+                        with open("bank.csv", "w", newline="") as csvfile:
+                            writer = csv.writer(csvfile)
+                            writer.writerows(accounts)
+                        betterPrint.betterPrint(betterPrint.strColor(f"Withdrew ${withdrawAmt:.2f} from {name}'s account.", "green"))
+                        betterPrint.betterPrint(betterPrint.strColor(f"Updated balance is ${new_balance}", "green"))
+                    else:
+                        betterPrint.betterPrint(betterPrint.strColor(f"Account for '{name}' not found", "red"))
+
                 case 4:
                     # Displays all accounts
-                    ...
+                    with open("bank.csv", "r", newline="") as csvfile:
+                        reader = csv.reader(csvfile)
+                        betterPrint.betterPrint(betterPrint.strColor("All Bank Accounts: ", "blue"))
+                        for row in reader:
+                            if row:
+                                name, balance = row[0], row[1]
+                                balance_wcolor = betterPrint.strColor(f"${float(balance):.2f}", "yellow")
+                                betterPrint.betterPrint(f"{name}: {balance_wcolor}")
+                    time.sleep(1)
+
                 case 5:
                     # Ends program
-                    ...
+                    running = False
+                    betterPrint.betterPrint(betterPrint.strColor("Ending program. Goodbye!", "green"))
+
         except ValueError:
             giveError()
 
