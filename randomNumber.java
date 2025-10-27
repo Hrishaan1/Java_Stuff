@@ -30,7 +30,7 @@ public class randomNumber {
             
             coolConsoleTyping.coolType("Nice guess! Your guess was " + Math.abs(randomInt - playerGuess) + " off from the correct number.", running);
             coolConsoleTyping.coolType("The correct number was " + randomInt + ".", running);
-            coolConsoleTyping.coolType("Would you like to try again? (answer with a yes or no)", running);
+            coolConsoleTyping.coolType("Would you like to try again? (answer with a yes or no) ", false);
             scanner.nextLine();
             String continuePlaying = scanner.nextLine();
 

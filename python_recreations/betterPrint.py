@@ -7,9 +7,9 @@ def main():
     colorPrint("blue", "blue")
     colorPrint("green", "green")
     betterPrint(strColor("cyan", "cyan"))
-    betterPrint(strColor("purple", "purple"))
-    print(strColor("orange", "orange"))
-    print(strColor("yellow", "yellow"))
+    betterPrint(strColor("purple", color="purple"))
+    print(strColor("orange", color="orange"))
+    print(strColor("yellow", color="yellow"))
 
 def betterPrint(str, delay=0.05, nextLine=True):
     for char in str:
