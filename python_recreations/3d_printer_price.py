@@ -6,7 +6,7 @@ def main():
     filament_cost = 0.03
     electricity_cost = 0.00035
     labor_cost = 3.0
-    profit_margin = 2.0
+    profit_multiplyer = 1.5
 
     # getting inputs
     print_duration_hrs = int(input("Print duration hours: "))
@@ -26,7 +26,9 @@ def main():
     calculated_fil = filament_cost * filament_usage
 
     # Final calculation
-    final_cost = calculated_elec + calculated_fil + labor_cost + profit_margin
+    final_cost_wihtout_profit = (calculated_elec + calculated_fil + labor_cost)
+    final_cost = final_cost_wihtout_profit * profit_multiplyer
+
     formatted_final_cost = "{:.2f}".format(final_cost)
 
 
@@ -39,7 +41,7 @@ def main():
     if breakdown_input == "y":
         betterPrint.betterPrint(f"Electricity costs: {betterPrint.strColor(f"${(calculated_elec)}", "green")}")
         betterPrint.betterPrint(f"Filament costs: {betterPrint.strColor(f"${calculated_fil}", "green")}")
-        betterPrint.betterPrint(f"Other costs: {betterPrint.strColor(f"${labor_cost + profit_margin}", "green")}")
+        betterPrint.betterPrint(f"Other costs: {betterPrint.strColor(f"${labor_cost + (final_cost - final_cost_wihtout_profit)}", "green")}")
 
 
 def convert_hours_to_min(hrs, mins):
